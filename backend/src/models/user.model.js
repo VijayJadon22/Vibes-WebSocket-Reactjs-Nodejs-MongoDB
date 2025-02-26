@@ -34,6 +34,11 @@ userSchema.pre("save", async function (next) {
 
 userSchema.methods.getJWTToken = function () {
     return jwt.sign({ userId: this._id }, process.env.JWT_SECRET, { expiresIn: "15d" });
+};
+
+// Method to compare a provided password with the hashed password stored in the database
+userSchema.methods.comparePassword = async function (password) {
+    return bcrypt.compare(password, this.password || "");
 }
 
 const User = mongoose.model("User", userSchema);
