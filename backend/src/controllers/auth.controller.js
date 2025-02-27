@@ -65,7 +65,7 @@ export const login = async (req, res) => {
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
-        generateTokenAndSetCookie(user, res);
+        await generateTokenAndSetCookie(user, res);
         return res.status(200).json({
             _id: user._id,
             email: user.email,
@@ -108,6 +108,15 @@ export const updateProfile = async (req, res) => {
         return res.status(200).json(updatedUser);
     } catch (error) {
         console.error("Error in updateProfile controller: ", error);
+        return res.status(500).json({ error: "Internal server error" });
+    }
+}
+
+export const checkAuth = (req, res) => {
+    try {
+        return res.status(200).json(req.user);
+    } catch (error) {
+        console.error("Error in checkAuth controller: ", error);
         return res.status(500).json({ error: "Internal server error" });
     }
 }
