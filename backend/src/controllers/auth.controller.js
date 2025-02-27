@@ -43,7 +43,7 @@ export const signup = async (req, res) => {
             return res.status(400).json({ message: "Invalid user data" });
         }
     } catch (error) {
-        console.error("Error in signup controller: ", error); // Log the error to the console
+        console.error("Error in signup controller: ", error.message); // Log the error to the console
         return res.status(500).json({ error: "Internal server error" }); // Respond with a 500 status code and error message
     }
 }
@@ -103,7 +103,7 @@ export const logout = (req, res) => {
         return res.status(200).json({ message: "Logged out successfully" });
     } catch (error) {
         // Log any errors to the console
-        console.error("Error in logout controller: ", error);
+        console.error("Error in logout controller: ", error.message);
         // Send a 500 Internal Server Error response in case of an exception
         return res.status(500).json({ error: "Internal server error" });
     }
@@ -136,7 +136,7 @@ export const updateProfile = async (req, res) => {
         return res.status(200).json(updatedUser);
     } catch (error) {
         // Log any errors to the console
-        console.error("Error in updateProfile controller: ", error);
+        console.error("Error in updateProfile controller: ", error.message);
         // Send a 500 Internal Server Error response in case of an exception
         return res.status(500).json({ error: "Internal server error" });
     }
@@ -149,7 +149,7 @@ export const checkAuth = (req, res) => {
         return res.status(200).json(req.user);
     } catch (error) {
         // Log any errors to the console
-        console.error("Error in checkAuth controller: ", error);
+        console.error("Error in checkAuth controller: ", error.message);
         // Send a 500 Internal Server Error response in case of an exception
         return res.status(500).json({ error: "Internal server error" });
     }

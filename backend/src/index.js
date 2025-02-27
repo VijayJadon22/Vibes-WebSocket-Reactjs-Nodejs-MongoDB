@@ -5,6 +5,7 @@ import cors from "cors";
 
 // Importing routes and database connection
 import authRoutes from "./routes/auth.routes.js";
+import messageRoutes from "./routes/message.routes.js";
 import { connectToDB } from "./lib/db.js";
 
 // Load environment variables from .env file
