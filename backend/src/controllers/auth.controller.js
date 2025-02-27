@@ -48,24 +48,37 @@ export const signup = async (req, res) => {
     }
 }
 
-
+// Function to handle user login
 export const login = async (req, res) => {
+    // Extract email and password from the request body
     const { email, password } = req.body;
     try {
+        // Check if email or password is missing in the request body
         if (!email || !password) {
+            // Send a 400 Bad Request response if either field is missing
             return res.status(400).json({ message: "All fields are required" });
         }
+
+        // Find the user in the database by email
         const user = await User.findOne({ email });
+        // Check if the user is not found
         if (!user) {
+            // Send a 400 Bad Request response if the credentials are invalid
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
+        // Compare the provided password with the stored password hash
         const isPasswordMatch = await user.comparePassword(password);
+        // Check if the passwords do not match
         if (!isPasswordMatch) {
+            // Send a 400 Bad Request response if the credentials are invalid
             return res.status(400).json({ message: "Invalid credentials" });
         }
 
+        // Generate JWT token and set it as an HTTP-only cookie in the response
         await generateTokenAndSetCookie(user, res);
+
+        // Send a successful response with user details
         return res.status(200).json({
             _id: user._id,
             email: user.email,
@@ -73,50 +86,71 @@ export const login = async (req, res) => {
             profilePic: user.profilePic
         });
     } catch (error) {
+        // Log any errors to the console
         console.error("Error in login controller: ", error);
+
+        // Send a 500 Internal Server Error response in case of an exception
         return res.status(500).json({ error: "Internal server error" });
     }
-}
+};
 
+// Function to handle user logout
 export const logout = (req, res) => {
     try {
         // Clear the authentication token cookie
         res.clearCookie("token");
+        // Send a successful response indicating the user has logged out
         return res.status(200).json({ message: "Logged out successfully" });
     } catch (error) {
+        // Log any errors to the console
         console.error("Error in logout controller: ", error);
+        // Send a 500 Internal Server Error response in case of an exception
         return res.status(500).json({ error: "Internal server error" });
     }
-}
+};
 
+// Function to update the user's profile picture
 export const updateProfile = async (req, res) => {
     try {
+        // Extract profilePic from the request body
         const { profilePic } = req.body;
+        // Extract userId from the authenticated user attached to the request object
         const userId = req.user._id;
 
+        // Check if profilePic is provided in the request body
         if (!profilePic) {
+            // Send a 400 Bad Request response if profilePic is missing
             return res.status(400).json({ message: "Profile pic is required" });
         }
 
+        // Upload the profile picture to Cloudinary and get the response
         const uploadResponse = await cloudinary.uploader.upload(profilePic);
 
+        // Find the user by userId and update their profilePic with the secure URL from Cloudinary
         const updatedUser = await User.findByIdAndUpdate(userId,
             { profilePic: uploadResponse.secure_url },
-            { new: true }
+            { new: true } // Return the updated user object
         );
 
+        // Send a successful response with the updated user object
         return res.status(200).json(updatedUser);
     } catch (error) {
+        // Log any errors to the console
         console.error("Error in updateProfile controller: ", error);
+        // Send a 500 Internal Server Error response in case of an exception
         return res.status(500).json({ error: "Internal server error" });
     }
-}
+};
 
+// Function to check if the user is authenticated and return user information
 export const checkAuth = (req, res) => {
     try {
+        // Send a successful response with the authenticated user object
         return res.status(200).json(req.user);
     } catch (error) {
+        // Log any errors to the console
         console.error("Error in checkAuth controller: ", error);
+        // Send a 500 Internal Server Error response in case of an exception
         return res.status(500).json({ error: "Internal server error" });
     }
-}
+};
