@@ -76,7 +76,7 @@ export const login = async (req, res) => {
         }
 
         // Generate JWT token and set it as an HTTP-only cookie in the response
-        await generateTokenAndSetCookie(user, res);
+        generateTokenAndSetCookie(user, res);
 
         // Send a successful response with user details
         return res.status(200).json({
@@ -88,7 +88,6 @@ export const login = async (req, res) => {
     } catch (error) {
         // Log any errors to the console
         console.error("Error in login controller: ", error);
-
         // Send a 500 Internal Server Error response in case of an exception
         return res.status(500).json({ error: "Internal server error" });
     }
