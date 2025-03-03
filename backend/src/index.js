@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 5001;
 // Middleware to parse cookies
 app.use(cookieParser());
 // Middleware to parse JSON request bodies
-app.use(express.json());
+app.use(express.json({ limit: "5mb" }));
 // Middleware to enable CORS (Cross-Origin Resource Sharing)
 app.use(
     cors({
