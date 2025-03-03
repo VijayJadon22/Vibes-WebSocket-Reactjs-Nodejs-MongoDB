@@ -1,44 +1,56 @@
-import React, { useState } from "react";
-import { useAuthStore } from "../store/useAuthStore.js";
-import AuthImagePattern from "../components/AuthImagePattern.jsx";
-import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare } from "lucide-react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react"; // Import React and useState hook
+import { useAuthStore } from "../store/useAuthStore.js"; // Import useAuthStore from the store
+import AuthImagePattern from "../components/AuthImagePattern.jsx"; // Import AuthImagePattern component
+import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare } from "lucide-react"; // Import icons from lucide-react
+import { Link } from "react-router-dom"; // Import Link component from react-router-dom
 
 const LoginPage = () => {
+  // State to handle form data
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  // State to handle password visibility
   const [showPassword, setShowPassword] = useState(false);
+
+  // Destructure isLoggingIn and login from useAuthStore
   const { isLoggingIn, login } = useAuthStore();
+
+  // Function to handle input changes
   const handleInputChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value }); // Update formData state with new input value
   };
 
+  // Function to handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault();
-    login(formData);
+    e.preventDefault(); // Prevent default form submission
+    login(formData); // Call login function with formData
   };
+
   return (
     <div className="h-screen grid lg:grid-cols-2">
+      {" "}
+      {/* Container for the login page */}
       {/* Left Side - Form */}
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">
           {/* Logo */}
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
-              <div
-                className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20
-          transition-colors"
-              >
-                {/* <MessageSquare className="w-6 h-6 text-primary" /> */}
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                {/* Logo image */}
                 <img
                   src="https://static.vecteezy.com/system/resources/previews/012/872/330/original/bubble-chat-icon-3d-png.png"
                   alt=""
                 />
               </div>
-              <h1 className="text-2xl font-bold mt-2">Welcome Back</h1>
-              <p className="text-base-content/60">Sign in to your account</p>
+              <h1 className="text-2xl font-bold mt-2">Welcome Back</h1>{" "}
+              {/* Title */}
+              <p className="text-base-content/60">
+                Sign in to your account
+              </p>{" "}
+              {/* Subtitle */}
             </div>
           </div>
 
@@ -50,7 +62,8 @@ const LoginPage = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-base-content/40" />
+                  <Mail className="h-5 w-5 text-base-content/40" />{" "}
+                  {/* Mail icon */}
                 </div>
                 <input
                   type="email"
@@ -69,7 +82,8 @@ const LoginPage = () => {
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-base-content/40" />
+                  <Lock className="h-5 w-5 text-base-content/40" />{" "}
+                  {/* Lock icon */}
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
@@ -82,12 +96,12 @@ const LoginPage = () => {
                 <button
                   type="button"
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-base-content/40" />
+                    <EyeOff className="h-5 w-5 text-base-content/40" /> // EyeOff icon for hidden password
                   ) : (
-                    <Eye className="h-5 w-5 text-base-content/40" />
+                    <Eye className="h-5 w-5 text-base-content/40" /> // Eye icon for visible password
                   )}
                 </button>
               </div>
@@ -96,11 +110,12 @@ const LoginPage = () => {
             <button
               type="submit"
               className="btn btn-secondary w-full"
-              disabled={isLoggingIn}
+              disabled={isLoggingIn} // Disable button if logging in
             >
               {isLoggingIn ? (
                 <>
-                  <Loader2 className="h-5 w-5 animate-spin" />
+                  <Loader2 className="h-5 w-5 animate-spin" />{" "}
+                  {/* Loading spinner */}
                   Loading...
                 </>
               ) : (
@@ -113,13 +128,14 @@ const LoginPage = () => {
             <p className="text-base-content/60">
               Don&apos;t have an account?{" "}
               <Link to="/signup" className="link link-secondary">
+                {" "}
+                {/* Link to signup page */}
                 Create account
               </Link>
             </p>
           </div>
         </div>
       </div>
-
       {/* Right Side - Image/Pattern */}
       <AuthImagePattern
         title={"Welcome back!"}
@@ -131,4 +147,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default LoginPage; // Export the LoginPage component
