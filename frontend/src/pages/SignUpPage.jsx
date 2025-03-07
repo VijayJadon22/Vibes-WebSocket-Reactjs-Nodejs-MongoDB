@@ -56,10 +56,10 @@ const SignUpPage = () => {
       {" "}
       {/* Container for the signup page */}
       {/* Left side of the form or page */}
-      <div className="flex flex-col justify-center items-center p-6 sm:p-12">
+      <div className="flex flex-col justify-center items-center p-6 sm:pt-20">
         <div className="w-full max-w-md space-y-8">
           {/* LOGO */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-2">
             <div className="flex flex-col items-center gap-2 group">
               <div className="size-12 rounded-xl flex items-center justify-center  transition-colors">
                 {/* Logo image */}
@@ -68,7 +68,7 @@ const SignUpPage = () => {
                   alt=""
                 />
               </div>
-              <h1 className="text-2xl font-bold mt-2">Create Account</h1>{" "}
+              <h1 className="text-2xl font-bold ">Create Account</h1>{" "}
               {/* Title */}
               <p className="text-base-content/60">
                 Get started with your free account
@@ -77,7 +77,7 @@ const SignUpPage = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-2">
             {/* Full name input field */}
             <div className="form-control">
               <label className="label">

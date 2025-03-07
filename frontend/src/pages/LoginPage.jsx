@@ -23,15 +23,15 @@ const LoginPage = () => {
   };
 
   // Function to handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    console.log(formData);
     e.preventDefault(); // Prevent default form submission
-    login(formData); // Call login function with formData
+    await login(formData); // Call login function with formData
   };
 
   return (
     <div className="h-screen grid lg:grid-cols-2">
       {" "}
-      {/* Container for the login page */}
       {/* Left Side - Form */}
       <div className="flex flex-col justify-center items-center p-6 sm:p-12">
         <div className="w-full max-w-md space-y-8">

@@ -51,6 +51,7 @@ export const signup = async (req, res) => {
 // Function to handle user login
 export const login = async (req, res) => {
     // Extract email and password from the request body
+    console.log(req.body);
     const { email, password } = req.body;
     try {
         // Check if email or password is missing in the request body
