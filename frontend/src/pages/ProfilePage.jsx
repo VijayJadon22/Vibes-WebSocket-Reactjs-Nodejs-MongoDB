@@ -10,7 +10,7 @@ const ProfilePage = () => {
 
   // Function to handle image upload
   const handleImageUpload = async (e) => {
-    const file = e.target.files[0]; // Getting the selected file from the input
+    const file = e.target.files[0]; // Getting the frist selected file from the input
     if (!file) return; // If no file is selected, exit the function
     const reader = new FileReader(); // Creating a new FileReader object
     reader.readAsDataURL(file); // Reading the file as a data URL
@@ -22,7 +22,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="h-screen pt-20">
+    <div className=" pt-20">
       <div className="max-w-2xl mx-auto p-4 py-8">
         <div className="bg-base-300 rounded-xl p-6 space-y-8">
           <div className="text-center">
