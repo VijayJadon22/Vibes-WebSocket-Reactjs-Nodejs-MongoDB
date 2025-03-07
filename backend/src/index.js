@@ -29,7 +29,7 @@ app.use(
 
 // Use the authentication routes for any requests starting with /api/auth
 app.use("/api/auth", authRoutes);
-app.use("/api/message", messageRoutes);
+app.use("/api/messages", messageRoutes);
 
 // Start the server and listen on the defined port
 app.listen(PORT, () => {
