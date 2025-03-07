@@ -12,11 +12,13 @@ const PREVIEW_MESSAGES = [
 ];
 
 const SettingsPage = () => {
+  // Destructure theme state and setTheme function from the theme store
   const { theme, setTheme } = useThemeStore();
 
   return (
-    <div className=" container mx-auto px-4 pt-20 max-w-5xl">
+    <div className="container mx-auto px-4 pt-20 max-w-5xl">
       <div className="space-y-6">
+        {/* Section for theme selection */}
         <div className="flex flex-col gap-1">
           <h2 className="text-lg font-semibold">Theme</h2>
           <p className="text-sm text-base-content/70">
@@ -24,6 +26,7 @@ const SettingsPage = () => {
           </p>
         </div>
 
+        {/* Grid of theme buttons */}
         <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
           {THEMES.map((t) => (
             <button
