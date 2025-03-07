@@ -6,7 +6,6 @@ import {
   Loader2,
   Lock,
   Mail,
-  MessageSquare,
   User,
 } from "lucide-react"; // Import icons from lucide-react
 import { Link } from "react-router-dom"; // Import Link component from react-router-dom
@@ -62,7 +61,7 @@ const SignUpPage = () => {
           {/* LOGO */}
           <div className="text-center mb-8">
             <div className="flex flex-col items-center gap-2 group">
-              <div className="size-12 rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+              <div className="size-12 rounded-xl flex items-center justify-center  transition-colors">
                 {/* Logo image */}
                 <img
                   src="https://static.vecteezy.com/system/resources/previews/012/872/330/original/bubble-chat-icon-3d-png.png"
