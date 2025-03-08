@@ -3,7 +3,7 @@ import { axiosInstance } from "../lib/axios.js"; // Import axiosInstance for mak
 import toast from "react-hot-toast"; // Import toast for displaying notifications
 import { io } from "socket.io-client"; // Import io function from socket.io-client for WebSocket communication
 
-const BASE_URL = "http://localhost:5001"; // Base URL for the server
+const BASE_URL = import.meta.env.MODE === "development" ? "http://localhost:5001" : "/"; // Base URL for the server
 
 // Create a Zustand store for authentication management
 export const useAuthStore = create((set, get) => ({

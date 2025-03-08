@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import cookieParser from 'cookie-parser';
 import cors from "cors";
 
+import path from "path";
+
 // Importing routes and database connection
 import authRoutes from "./routes/auth.routes.js";
 import messageRoutes from "./routes/message.routes.js";
@@ -14,6 +16,8 @@ dotenv.config();
 
 // Define the port on which the server will run
 const PORT = process.env.PORT || 5001;
+
+const __dirname = path.resolve();
 
 // Middleware to parse cookies
 app.use(cookieParser());
@@ -30,6 +34,15 @@ app.use(
 // Use the authentication routes for any requests starting with /api/auth
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
+
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+    app.get("*", (req, res) => {
+        res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+    })
+}
 
 // Start the server and listen on the defined port
 server.listen(PORT, () => {
