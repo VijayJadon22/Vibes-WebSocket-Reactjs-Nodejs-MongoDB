@@ -7,10 +7,10 @@ import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
 import messageRoutes from "./routes/message.routes.js";
 import { connectToDB } from "./lib/db.js";
+import { app,server } from "./lib/socket.js";
 
 // Load environment variables from .env file
 dotenv.config();
-const app = express();
 
 // Define the port on which the server will run
 const PORT = process.env.PORT || 5001;
@@ -32,7 +32,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
 // Start the server and listen on the defined port
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server started at PORT:${PORT}`);
     // Connect to the database
     connectToDB();
